@@ -1,49 +1,36 @@
 import React from 'react';
 import css from './App.module.css';
 import Counter from "./components/Counter/Counter";
+import {HashRouter, Route} from "react-router-dom";
+import TodoList from "./components/TodoList/TodoList";
+import Navbar from "./components/Navbar/Navbar";
 
 class App extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.addNameRef = React.createRef();
+  state = {
+    loading: true
   }
 
-  state = {
-    count: 0,
-    names: [
-      {name: null}
-    ]
-  };
-
-  onClickFunc = () => {
-    // debugger;
-    let newTitle = this.addNameRef.current.value;
-    let newName = {name: newTitle};
-    let copyNames = [...this.state.names, newName];
-    if (newTitle !== ''  && isNaN(newTitle[0])) {
-      this.setState({names: copyNames});
-      this.setState({count: this.state.count + 1});
-      this.addNameRef.current.value = '';
-    } else {
-      alert("Write name!!! The first character cannot be a number");
+  componentDidMount() {
+    if (this.state.loading === true) {
+      setTimeout(() => {
+        this.setState({loading: false})
+      }, 300)
     }
-  };
+  }
 
   render() {
-    let namesArr = this.state.names.map((elem, index) => {
-      if (index > 0) {
-        return <div key={index}> {`${index}.  ${elem.name}`}  </div>
-      }
-    });
     return (
-      <div className={css.app}>
-        <Counter
-          state={this.state}
-          clickFunc={this.onClickFunc}
-          addNameRef={this.addNameRef}
-          namesArr={namesArr}/>
-      </div>
+      <>
+        {this.state.loading? <div>loading...</div>
+          :<HashRouter basename='/main'>
+            <div className={css.app}>
+              <Route path='/' render={() => <Navbar/>}/>
+              <Route path='/monday' render={() => <Counter/>}/>
+              <Route path='/tuesday' render={() => <TodoList/>}/>
+            </div>
+          </HashRouter>}
+      </>
     );
   }
 }

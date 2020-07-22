@@ -6,14 +6,3 @@
     box-sizing: border-box;
     align-items: center;
 }
-
-.counter input {
-    background-color: #F0F0F0;
-    box-sizing: border-box;
-    width: 200px;
-    height: 50px;
-    margin: 0;
-    padding: 0 0 0 15px;
-    border: 0;
-}
-
