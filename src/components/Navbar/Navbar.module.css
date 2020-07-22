@@ -24,6 +24,10 @@
     -webkit-backface-visibility: hidden;
 }
 
+.hidden_menu a {
+    text-decoration: none;
+    /*color: black;*/
+}
 .hidden_menu_ticker {
     display: none;
 }

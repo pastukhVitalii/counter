@@ -5,18 +5,15 @@ import {HashRouter, Route} from "react-router-dom";
 import TodoList from "./components/TodoList/TodoList";
 import Navbar from "./components/Navbar/Navbar";
 import {connect} from "react-redux";
+import Wednesday from "./components/Wednesday/Wednesday";
 
 class App extends React.Component {
-
-  /*state = {
-    loading: true
-  }*/
 
   componentDidMount() {
     if (this.props.loading === true) {
       setTimeout(() => {
         this.props.isFetching();
-      }, 300)
+      }, 100)
     }
   }
 
@@ -29,6 +26,7 @@ class App extends React.Component {
               <Route path='/' render={() => <Navbar/>}/>
               <Route path='/monday' render={() => <Counter/>}/>
               <Route path='/tuesday' render={() => <TodoList/>}/>
+              <Route path='/wednesday' render={() => <Wednesday/>}/>
             </div>
           </HashRouter>}
       </>
@@ -38,7 +36,7 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    loading: state.loading
+    loading: state.todolist.loading
   }
 }
 const mapDispatchToProps = (dispatch) => {

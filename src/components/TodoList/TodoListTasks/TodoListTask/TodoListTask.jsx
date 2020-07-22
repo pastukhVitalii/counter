@@ -3,16 +3,14 @@ import Info from "../../../Counter/info/Info";
 
 
 class TodoListTask extends React.Component {
+
   state = {
     isEditMode: false,
     hovering: false
   };
+
   date = new Date().toLocaleTimeString('en', {day: 'numeric',month: 'short', year: 'numeric', hour: 'numeric', minute: 'numeric'});
-  /*dateFunc = () => {
-    this.setState(date ,() => {
-      this.date
-    })
-  }*/
+
   activatedEditMode = () => {
     this.setState({isEditMode: true})
   };
@@ -22,7 +20,6 @@ class TodoListTask extends React.Component {
 
   onIsDoneChanged = (e) => {
     this.props.changeStatus(this.props.task.id, e.currentTarget.checked, this.date);
-
   };
 
   onTitleChanged = (e) => {

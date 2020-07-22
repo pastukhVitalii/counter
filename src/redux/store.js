@@ -1,17 +1,11 @@
-import {createStore} from "redux";
+import {combineReducers, createStore} from "redux";
+import {todolistReducer} from "./todolistReducer";
+import {settingsReducer} from "./settingsReducer";
 
-let initialState = {
-  loading: true
-}
+let rootReducer = combineReducers({
+  todolist: todolistReducer,
+  settings: settingsReducer
+})
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "SET_LOADING":
-      return {...state, loading: action.loading}
-    default:
-      return state
-  }
-}
-
-const store = createStore(reducer);
+const store = createStore(rootReducer);
 export default store;
