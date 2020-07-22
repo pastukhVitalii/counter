@@ -15,7 +15,6 @@ class TodoList extends React.Component {
   };
   nextTaskId = 1;
 
-
   saveLocalStorage = () => {
     saveState('state', this.state)
   }

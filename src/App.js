@@ -4,17 +4,18 @@ import Counter from "./components/Counter/Counter";
 import {HashRouter, Route} from "react-router-dom";
 import TodoList from "./components/TodoList/TodoList";
 import Navbar from "./components/Navbar/Navbar";
+import {connect} from "react-redux";
 
 class App extends React.Component {
 
-  state = {
+  /*state = {
     loading: true
-  }
+  }*/
 
   componentDidMount() {
-    if (this.state.loading === true) {
+    if (this.props.loading === true) {
       setTimeout(() => {
-        this.setState({loading: false})
+        this.props.isFetching();
       }, 300)
     }
   }
@@ -22,8 +23,8 @@ class App extends React.Component {
   render() {
     return (
       <>
-        {this.state.loading? <div>loading...</div>
-          :<HashRouter basename='/main'>
+        {this.props.loading ? <div>loading...</div>
+          : <HashRouter basename='/main'>
             <div className={css.app}>
               <Route path='/' render={() => <Navbar/>}/>
               <Route path='/monday' render={() => <Counter/>}/>
@@ -35,4 +36,19 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    loading: state.loading
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    isFetching(loading) {
+      let action = {type: 'SET_LOADING', loading: false};
+      dispatch(action);
+    }
+  }
+}
+
+let connectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
+export default connectedApp;
